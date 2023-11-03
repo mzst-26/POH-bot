@@ -10,9 +10,9 @@ export default function Home() {
   const { open, close } = useWeb3Modal();
   const { data, signMessage } = useSignMessage();
   const {address, isConnecting, isDisconnected } = useAccount();
-  const [signature, setSignature] = useState();
   
-
+  
+  
   // useEffect(() => {
   //   if (!data && address) {
   //     signAmessage();
@@ -36,9 +36,6 @@ export default function Home() {
   async function signAmessage() {
     const message = 'Sign this message to prove you are human';
     const signedMessage = await signMessage({ message });
-    setSignature(signedMessage);
-    const sig  = await data;
-    console.log(sig, address);
  
   }
 
