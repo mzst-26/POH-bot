@@ -29,14 +29,17 @@ export default function Home() {
     }
   
   }
+
+  //disconnect wallet 
   async function Disconnect() {
     await open(false);
     setIsClosed(true)
   
   }
+
   useEffect(()=>{
     if (isClosed === true){
-      window.location.reload();
+      // window.location.reload();
     }
   })
 
@@ -49,7 +52,9 @@ export default function Home() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className={`flex flex-row items-center p-24 `}>
-        {(!data && !address) && <a
+
+        {/* //display the connect wallet button when we don't have the address */}
+        {(!address) && <a
           onClick={handleConnectWalletButton}
           className="border-black group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
           target="_blank"
@@ -65,6 +70,8 @@ export default function Home() {
             Connect your wallet and sign a message.
           </p>
         </a>}
+
+      {/* //display the sign in button when we don't have the signature */}
         {(!data && address) && 
         <a
         onClick={signAmessage}
@@ -80,6 +87,8 @@ export default function Home() {
           Sign a message.
         </p>
       </a>}
+
+      {/* //display the disconnect wallet button when we have the address or data */}
       {(data || address) &&
       <a
       onClick={Disconnect}
@@ -101,6 +110,8 @@ export default function Home() {
       </div>
       {address && <p>address: {address}</p>}
         {data && <p>Signature: {data}</p>}
+
+
 
     </QueryClientProvider>
   );
